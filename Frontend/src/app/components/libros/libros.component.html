@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center">
+    <div id="sliderImagenes" class="carousel slide carousel-dark w-auto" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active p-0">
+                <div class="d-flex justify-content-center m-0">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <img [src]="libro.imagen" class="d-block img-thumbnail img-fluid" alt="image-slider">
+                            <div class="card-img-overlay h-25">
+                                <h2 class="text-light fs-2 fw-bold">{{libro.titulo | titlecase}}</h2>
+                                <p class="text-light fs-5 mx-5 px-5">{{libro.descripcion | titlecase}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#sliderImagenes" data-bs-slide="prev" (click)="anterior()">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#sliderImagenes" data-bs-slide="next" (click)="siguiente()">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>

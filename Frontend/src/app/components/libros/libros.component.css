@@ -1,0 +1,17 @@
+img {
+    height: 90vh;
+}
+
+.card-img-overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    top: 75%;
+    bottom: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    padding: 25px;
+    margin: 10px;
+    border-radius: 50%;
+}

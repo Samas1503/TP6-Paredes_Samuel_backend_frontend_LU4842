@@ -1,0 +1,68 @@
+<div class="px-5">
+    <!-- main -->
+    <div class="my-5">
+        <div class="d-flex mb-3 justify-content-between-fill">
+            <form class="d-flex col-6">
+                <select class="form-select me-2" [(ngModel)]="categoriaFiltrar" name="categoria" id="categoria">
+                    <option value="m">Menor</option>
+                    <option value="a">Adulto</option>
+                    <option value="j">Jubilado</option>
+                </select>
+                <button type="button" class="btn btn-primary" [disabled]="!categoriaFiltrar.length" (click)="filtrarPorCategoria()">Filtrar</button>
+            </form>
+            <button type="button" class="btn btn-primary ms-auto col-2" [hidden]="categoriaFiltrar==''" (click)="limpiar()">Limpiar</button>
+        </div>
+        <div class="table-responsive">
+            <a [routerLink]="'/pasajes/crear'" class="btn btn-success d-block w-100">Crear Transaccion<i class="bi bi-plus fw-bold"></i></a>
+            <table class="table table-borderless table-dark">
+                <thead>
+                    <tr>
+                        <th>Precio Pasaje</th>
+                        <th>Categoria Pasaje</th>
+                        <th>Fecha Compra</th>
+                        <th>Pasajero</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pasaje of pasajes">
+                        <td>{{pasaje.precioPasaje | currency}}</td>
+                        <td>{{pasaje.categoriaPasajero | mostrarCategoria}}</td>
+                        <td>{{pasaje.fechaCompra}}</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pasajeroModal">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade text-dark" id="pasajeroModal" tabindex="-1" aria-labelledby="pasajeroModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="pasajeroModalLabel">Pasajero</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>DNI: </strong>{{pasaje.pasajero.nro_documento}}</p>
+                                            <p><strong>Nombre: </strong>{{pasaje.pasajero.nombre}}</p>
+                                            <p><strong>Apellido: </strong>{{pasaje.pasajero.apellido}}</p>
+                                            <p><strong>Email: </strong>{{pasaje.pasajero.email}}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-warning me-2" (click)="editarPasaje(pasaje)"><i class="bi bi-pen-fill"></i></button>
+                            <button type="button" class="btn btn-danger" (click)="eliminarPasaje(pasaje)"><i class="bi bi-trash-fill"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

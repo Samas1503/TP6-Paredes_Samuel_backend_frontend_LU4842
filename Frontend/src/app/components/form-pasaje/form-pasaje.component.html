@@ -1,0 +1,47 @@
+<div class="container col-8 mx-auto my-3">
+    <form method="post" #pasajeForm="ngForm">
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input class="form-control" type="number" name="precio" id="precio" [(ngModel)]="pasaje.precioPasaje" required min="0">
+
+            <div *ngIf="!pasaje.precioPasaje" class="alert alert-danger my-1 p-1">
+                El precio es requerido
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cateogira" class="form-label">Categoria</label>
+            <select class="form-select" name="categoria" id="categoria" [(ngModel)]="pasaje.categoriaPasajero" required>
+                <option value="m">Menor</option>
+                <option value="a">Adulto</option>
+                <option value="j">Jubilado</option>
+            </select>
+
+            <div *ngIf="pasaje.categoriaPasajero==''" class="alert alert-danger my-1 p-1">
+                La categoria es requerida
+            </div>
+        </div>
+        <div class="mb-3" *ngIf="!action">
+            <label for="pasajero" class="form-label">Pasajero</label>
+            <select [(ngModel)]="pasaje.pasajero" name="pasajero" class="form-select" id="pasajero" required>
+                <option *ngFor="let persona of personas" [ngValue]="persona">{{persona.nro_documento}},
+                    {{persona.apellido |
+                    titlecase}} {{persona.nombre | titlecase}}</option>
+            </select>
+
+            <div *ngIf="pasaje.pasajero==undefined" class="alert alert-danger my-1 p-1">
+                El pasajero es requerido
+            </div>
+        </div>
+        <div *ngIf="pasaje.precioPasaje !=0 && pasaje.categoriaPasajero != ''" class="mb-3">
+            <label for="form-label">El precio total es: {{calcularTotal(pasaje.categoriaPasajero) | currency}}</label>
+        </div>
+        <div *ngIf="action" class="d-flex justify-content-evenly">
+            <button type="button" class="btn btn-primary" (click)="actualizarPasaje()" [disabled]="pasajeForm.form.invalid">Actualizar</button>
+            <button type="button" class="btn btn-warning" (click)="volver()">Cancelar</button>
+        </div>
+        <div *ngIf="!action" class="d-flex justify-content-evenly">
+            <button type="button" class="btn btn-success" (click)="crearPasaje()" [disabled]="pasajeForm.form.invalid">Registrar</button>
+            <button type="button" class="btn btn-warning" (click)="volver()">Cancelar</button>
+        </div>
+    </form>
+</div>
